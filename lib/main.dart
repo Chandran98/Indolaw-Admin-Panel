@@ -1,19 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:panel/constant/constants.dart';
 import 'package:panel/routes/routes.dart';
-import 'package:panel/views/Banners_screen.dart';
-import 'package:panel/views/Lawyers_screen.dart';
+import 'package:panel/views/Mainscreen.dart';
 // import 'package:webui.dart';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
-
-import 'package:panel/views/Login_page.dart';
-import 'package:panel/views/Mainscreen.dart';
-import 'package:panel/views/Notification_screen.dart';
-import 'package:panel/views/Settings_screen.dart';
-import 'package:panel/views/cases_order.dart';
 import 'package:sizer/sizer.dart';
 
 Future main() async {
@@ -49,7 +41,7 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           title: 'Admin panel',
           theme: ThemeData(primaryColor: dialog),
-          home: Mainscreen(),
+          home: const Mainscreen(),
           routes: routes
         );
       },

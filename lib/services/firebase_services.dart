@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
@@ -8,12 +7,16 @@ class FirebaseServices {
   CollectionReference bannerimages =
       FirebaseFirestore.instance.collection("Banners");
   CollectionReference lawyer = FirebaseFirestore.instance.collection("Lawyers");
+  CollectionReference category =
+      FirebaseFirestore.instance.collection("Category");
+
   FirebaseStorage storage = FirebaseStorage.instance;
   Future<QuerySnapshot> getadmincredentails(username) {
     var result = FirebaseFirestore.instance.collection('Admin').get();
     return result;
   }
 
+////banner ////
   Future<String> uploadimagestoDB(url) async {
     String downloadurl = await storage.ref(url).getDownloadURL();
     if (downloadurl != null) {
@@ -26,15 +29,29 @@ class FirebaseServices {
     firestore.collection("Banners").doc(id).delete();
   }
 
-  
-  lawyerstatus({id,status}) async {
-    lawyer.doc(id).update({"accountverified":status?false:true});
+  //// lawyer ////
+
+  lawyerstatus({id, status}) async {
+    lawyer.doc(id).update({"accountverified": status ? false : true});
   }
 
-
-  toplawyer({id,status}) async {
-    lawyer.doc(id).update({"toppicked":status?false:true});
+  toplawyer({id, status}) async {
+    lawyer.doc(id).update({"toppicked": status ? false : true});
   }
+
+//// category ////
+
+  Future<String> uploadcataegory(url, categoryname) async {
+    String downloadurl = await storage.ref(url).getDownloadURL();
+    if (downloadurl != null) {
+      category
+          .doc(categoryname)
+          .set({"images": downloadurl, "name": categoryname});
+    }
+    return downloadurl;
+  }
+
+  ///content///
 
   Future<void> confirmdeletedialog({title, context, message, id}) {
     return showDialog<void>(
@@ -80,7 +97,7 @@ class FirebaseServices {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text("Ok"))
+                    child: const Text("Ok"))
               ],
             ));
   }

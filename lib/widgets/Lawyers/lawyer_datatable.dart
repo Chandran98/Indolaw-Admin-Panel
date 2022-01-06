@@ -168,7 +168,7 @@ class _LawyertableState extends State<Lawyertable> {
                   context: context,
                   builder: (context) {
                     return Lawyersdetails(
-                      uid: "uid",
+                      uid: document.get("uid"),
                     );
                   });
             },
